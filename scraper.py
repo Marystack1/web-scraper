@@ -6,11 +6,12 @@ import csv
 url = "http://quotes.toscrape.com"
 
 #1. send an HTTP request to the url
-response = response.get(url)
+response = requests.get(url)
 
 #check if the requests was successful
-if response.status_status == 200:
+if response.status_code == 200:
 #parse the HTML content
+    print("success! I found the page.")
     soup = BeautifulSoup(response.text, 'html.parser' )
 
 #find the quote containers (they are <div> tags with class 'quote')
@@ -21,10 +22,10 @@ for quote in quotes:
     text = quote.find('span', class_='text').get_text()
 
     #Extract the author's name 
-    author = quote.find('small',class_='author').get-text
+    author = quote.find('small',class_='author').get_text()
 
     print (f"Quote:{text}")
     print(f"By:{author}\n" + "_"*20)
 
 else:
-        print(f"Failed to retrieve the page. Status code:{response.stutus_code}")
+        print(f"Failed to retrieve the page. Status code:{response.status_code}")
